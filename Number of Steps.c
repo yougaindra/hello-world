@@ -1,3 +1,4 @@
+//SPOJ id 1112
 #include <stdio.h>
 
 int main()
