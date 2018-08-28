@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+vector<long long> dp(105);
+vector<long long> p(105);
+vector<long long> vis(105);
+int k;
+long long f(int n)
+{
+	//cout << n << endl;
+	if(n == 0) return 0;
+	if(vis[n])
+		return dp[n];
+	vis[n] = 1;
+	long long temp = INT_MAX;
+	int flag =0;
+	for(int i = 1; i<= n; i++)
+	{
+		if(p[i] == -1 || f(n-i) == -1) continue;
+		flag = 1;
+		temp = min(temp,p[i] + f(n-i));
+	}
+ 
+	if(!flag) temp = -1;
+	return dp[n] = temp;
+}
+ 
+int main()
+{
+	int c;
+	cin >> c;
+	while(c--)
+	{
+		for(int i = 0; i < 105; i++)
+			dp[i] = -1,vis[i] = 0;
+		int n;
+		cin >> n >> k;
+		for(int i = 1;i <= k; i++)
+			cin >> p[i];
+		cout << f(k) << endl;
+	}
+	return 0;
+} 
